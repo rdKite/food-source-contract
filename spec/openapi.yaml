@@ -1,0 +1,273 @@
+openapi: 3.1.0
+info:
+  title: Food-source contract
+  version: '1.0'
+  description: |
+    What the applications of the ecosystem (Merlin, Lori) expect from any food source.
+    The prose in CONTRACT.md and this file must say the same. Nutrient keys come from
+    registry/nutrients.json.
+
+paths:
+  /capabilities:
+    get:
+      operationId: capabilities
+      summary: What the source is and what it delivers
+      responses:
+        '200':
+          description: The source's self-description
+          headers:
+            Food-Source-Contract: { $ref: '#/components/headers/ContractVersion' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Capabilities' }
+
+  /foods/search:
+    get:
+      operationId: search
+      summary: Foods matching a text, best match first
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema: { type: string }
+          description: Shorter than two characters yields an empty result, not an error.
+        - $ref: '#/components/parameters/Locale'
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        '200':
+          description: The hits
+          headers:
+            Food-Source-Contract: { $ref: '#/components/headers/ContractVersion' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SearchResult' }
+        '400': { $ref: '#/components/responses/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Error' }
+
+  /foods/{external_id}:
+    get:
+      operationId: food
+      summary: One food with all its values
+      parameters:
+        - name: external_id
+          in: path
+          required: true
+          schema: { type: string, minLength: 1 }
+        - $ref: '#/components/parameters/Locale'
+      responses:
+        '200':
+          description: The food
+          headers:
+            Food-Source-Contract: { $ref: '#/components/headers/ContractVersion' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Food' }
+        '404': { $ref: '#/components/responses/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Error' }
+
+  /foods:
+    get:
+      operationId: batch
+      summary: Several foods in one request (feature "batch")
+      parameters:
+        - name: ids
+          in: query
+          required: true
+          description: Comma-separated external ids, at most 100.
+          schema: { type: string }
+        - $ref: '#/components/parameters/Locale'
+      responses:
+        '200':
+          description: The foods found; unknown ids in `missing`
+          headers:
+            Food-Source-Contract: { $ref: '#/components/headers/ContractVersion' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Batch' }
+        '400': { $ref: '#/components/responses/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Error' }
+
+components:
+  headers:
+    ContractVersion:
+      description: The contract version the response conforms to.
+      schema: { type: string, pattern: '^\d+\.\d+$' }
+
+  parameters:
+    Locale:
+      name: locale
+      in: query
+      schema: { type: string, pattern: '^[a-z]{2}(-[A-Z]{2})?$' }
+      description: The requested locale; the source falls back to its default.
+
+  responses:
+    Error:
+      description: A typed error
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    RateLimited:
+      description: Too many requests
+      headers:
+        Retry-After:
+          schema: { type: integer, minimum: 0 }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+
+  schemas:
+    Locale:
+      type: string
+      pattern: '^[a-z]{2}(-[A-Z]{2})?$'
+
+    NutrientKey:
+      description: A key of registry/nutrients.json.
+      type: string
+      pattern: '^[a-z][a-z0-9_]*$'
+
+    LocalizedNames:
+      type: object
+      minProperties: 1
+      propertyNames: { $ref: '#/components/schemas/Locale' }
+      additionalProperties: { type: string, minLength: 1 }
+
+    Capabilities:
+      type: object
+      required: [contract_version, source, nutrients]
+      properties:
+        contract_version: { type: string, pattern: '^1\.\d+$' }
+        source:
+          type: object
+          required: [name, version, default_locale, locales, identity]
+          properties:
+            name: { type: string, minLength: 1 }
+            version: { type: string, minLength: 1 }
+            default_locale: { $ref: '#/components/schemas/Locale' }
+            locales:
+              type: array
+              minItems: 1
+              items: { $ref: '#/components/schemas/Locale' }
+            citation: { type: string }
+            licence: { type: string }
+            identity: { type: string, enum: [stable, per_version] }
+        nutrients:
+          type: array
+          uniqueItems: true
+          items: { $ref: '#/components/schemas/NutrientKey' }
+        features:
+          type: array
+          uniqueItems: true
+          items: { type: string, enum: [batch, portions] }
+
+    SearchResult:
+      type: object
+      required: [version, results]
+      properties:
+        version: { type: string, minLength: 1 }
+        results:
+          type: array
+          maxItems: 50
+          items:
+            type: object
+            required: [external_id, name, locale]
+            properties:
+              external_id: { type: string, minLength: 1 }
+              name: { type: string, minLength: 1 }
+              locale: { $ref: '#/components/schemas/Locale' }
+              kind: { $ref: '#/components/schemas/Kind' }
+
+    Kind:
+      type: string
+      enum: [food, recipe]
+      default: food
+
+    Food:
+      type: object
+      required: [external_id, version, name, locale, base, nutrients]
+      properties:
+        external_id: { type: string, minLength: 1 }
+        version: { type: string, minLength: 1 }
+        kind: { $ref: '#/components/schemas/Kind' }
+        name: { type: string, minLength: 1 }
+        locale: { $ref: '#/components/schemas/Locale' }
+        names: { $ref: '#/components/schemas/LocalizedNames' }
+        base: { type: string, enum: [100g, 100ml] }
+        density_g_per_ml:
+          oneOf:
+            - { type: 'null' }
+            - { type: number, exclusiveMinimum: 0 }
+        nutrients:
+          type: object
+          propertyNames: { $ref: '#/components/schemas/NutrientKey' }
+          additionalProperties: { $ref: '#/components/schemas/NutrientValue' }
+        portions:
+          type: array
+          items: { $ref: '#/components/schemas/Portion' }
+
+    NutrientValue:
+      type: object
+      required: [value, status]
+      properties:
+        value:
+          oneOf:
+            - { type: 'null' }
+            - { type: number, minimum: 0 }
+        status:
+          type: string
+          enum: [measured, calculated, estimated, unspecified, partial, trace, missing, not_collected]
+        origin: { type: string, minLength: 1 }
+        reference: { type: string, minLength: 1 }
+        coverage: { type: number, minimum: 0, maximum: 1 }
+      allOf:
+        # value is null exactly for trace, missing and not_collected
+        - if:
+            properties: { status: { enum: [trace, missing, not_collected] } }
+          then:
+            properties: { value: { type: 'null' } }
+          else:
+            properties: { value: { type: number } }
+        # coverage only belongs to a lower bound
+        - if:
+            required: [coverage]
+          then:
+            properties: { status: { const: partial } }
+
+    Portion:
+      type: object
+      required: [id, names, amount]
+      properties:
+        id: { type: string, pattern: '^[a-z0-9_-]+$' }
+        names: { $ref: '#/components/schemas/LocalizedNames' }
+        amount:
+          description: The amount in the food's base unit (g for 100g, ml for 100ml).
+          type: number
+          exclusiveMinimum: 0
+        default: { type: boolean }
+
+    Batch:
+      type: object
+      required: [version, foods, missing]
+      properties:
+        version: { type: string, minLength: 1 }
+        foods:
+          type: array
+          items: { $ref: '#/components/schemas/Food' }
+        missing:
+          type: array
+          items: { type: string }
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: string, enum: [bad_request, not_found, rate_limited, unavailable] }
+            message: { type: string }

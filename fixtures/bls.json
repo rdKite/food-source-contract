@@ -1,0 +1,1364 @@
+{
+  "_comment": "Fixture of the food-source contract 1.0 (CONTRACT.md). ILLUSTRATIVE VALUES — not taken from the Bundeslebensmittelschlüssel or any other database. Energy is derived from the macronutrients (Atwater 9/4/4), so the records are internally consistent. Consumers use it through their fixture driver in development and tests.",
+  "contract_version": "1.0",
+  "source": {
+    "name": "BLS (Fixture)",
+    "version": "fixture-2",
+    "default_locale": "de",
+    "locales": [
+      "de",
+      "en"
+    ],
+    "citation": "Illustrative fixture data of the food-source contract.",
+    "licence": "CC0 1.0",
+    "identity": "stable"
+  },
+  "nutrients": [
+    "energy",
+    "fat",
+    "saturated_fat",
+    "carbohydrate",
+    "sugars",
+    "protein",
+    "salt"
+  ],
+  "features": [
+    "batch",
+    "portions"
+  ],
+  "foods": [
+    {
+      "external_id": "FIX0001",
+      "version": "fixture-2",
+      "name": "Haferflocken, Vollkorn",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 352,
+          "status": "calculated",
+          "origin": "Formelberechnung"
+        },
+        "fat": {
+          "value": 7.0,
+          "status": "measured",
+          "origin": "Literatur",
+          "reference": "Illustrative reference, not a real publication"
+        },
+        "saturated_fat": {
+          "value": 1.3,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 58.7,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 1.2,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 13.5,
+          "status": "measured",
+          "origin": "Analyse"
+        },
+        "salt": {
+          "value": 0.01,
+          "status": "measured"
+        }
+      },
+      "kind": "food",
+      "portions": [
+        {
+          "id": "tablespoon",
+          "names": {
+            "de": "1 Esslöffel"
+          },
+          "amount": 10
+        },
+        {
+          "id": "serving",
+          "names": {
+            "de": "1 Portion"
+          },
+          "amount": 50,
+          "default": true
+        }
+      ],
+      "names": {
+        "de": "Haferflocken, Vollkorn",
+        "en": "Oat flakes, wholegrain"
+      }
+    },
+    {
+      "external_id": "FIX0002",
+      "version": "fixture-2",
+      "name": "Apfel, roh",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 49,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.03,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 11.4,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 10.3,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 0.3,
+          "status": "measured"
+        },
+        "salt": {
+          "value": null,
+          "status": "trace"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0003",
+      "version": "fixture-2",
+      "name": "Banane, roh",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 86,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.07,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 20.0,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 17.3,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 1.1,
+          "status": "measured"
+        },
+        "salt": {
+          "value": null,
+          "status": "trace"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0004",
+      "version": "fixture-2",
+      "name": "Möhre, roh",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 25,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.04,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 4.8,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 4.7,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 1.0,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.15,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0005",
+      "version": "fixture-2",
+      "name": "Tomate, roh",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 16,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.03,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 2.6,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 2.5,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 0.9,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.01,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0006",
+      "version": "fixture-2",
+      "name": "Kartoffeln, geschält, gekocht",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 68,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.1,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.02,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 14.8,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.6,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 1.9,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.01,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0007",
+      "version": "fixture-2",
+      "name": "Reis, parboiled, gekocht",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 127,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.3,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.08,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 28.5,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.1,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 2.5,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.01,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0008",
+      "version": "fixture-2",
+      "name": "Spaghetti, Hartweizen, gekocht",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 144,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.6,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.1,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 29.5,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.8,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 5.1,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.01,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0009",
+      "version": "fixture-2",
+      "name": "Vollkornbrot, Roggen",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 193,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 1.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 38.6,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 2.8,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 7.0,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 1.1,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0010",
+      "version": "fixture-2",
+      "name": "Butter",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 754,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 83.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 52.0,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 0.6,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.6,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 0.7,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.03,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0011",
+      "version": "fixture-2",
+      "name": "Olivenöl, nativ extra",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 898,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 99.8,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 14.0,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": null,
+          "status": "trace"
+        },
+        "sugars": {
+          "value": null,
+          "status": "trace"
+        },
+        "protein": {
+          "value": null,
+          "status": "trace"
+        },
+        "salt": {
+          "value": null,
+          "status": "trace"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0012",
+      "version": "fixture-2",
+      "name": "Walnüsse",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 665,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 62.5,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 6.0,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 10.6,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": null,
+          "status": "missing"
+        },
+        "protein": {
+          "value": 15.0,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.01,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0013",
+      "version": "fixture-2",
+      "name": "Hühnerei, hart gekocht",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 151,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 10.7,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 3.1,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 0.7,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.7,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 12.9,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.35,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0014",
+      "version": "fixture-2",
+      "name": "Hähnchenbrust, ohne Haut, roh",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 105,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 1.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.4,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 0.0,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.0,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 23.6,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.16,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0015",
+      "version": "fixture-2",
+      "name": "Lachs, roh",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 202,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 13.6,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 2.7,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 0.0,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.0,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 20.0,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.13,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0016",
+      "version": "fixture-2",
+      "name": "Speisequark, mager",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 73,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.3,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 4.0,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 4.0,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 13.5,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.1,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0017",
+      "version": "fixture-2",
+      "name": "Joghurt, 3,5 % Fett",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 61,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 3.5,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 2.2,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 4.0,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 4.0,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 3.4,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.12,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0018",
+      "version": "fixture-2",
+      "name": "Emmentaler, 45 % Fett i. Tr.",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 383,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 29.7,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 18.5,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": null,
+          "status": "trace"
+        },
+        "sugars": {
+          "value": null,
+          "status": "trace"
+        },
+        "protein": {
+          "value": 28.9,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.6,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0019",
+      "version": "fixture-2",
+      "name": "Linsen, gekocht",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 106,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.5,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.07,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 16.3,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.9,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 9.0,
+          "status": "measured"
+        },
+        "salt": {
+          "value": null,
+          "status": "missing"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0020",
+      "version": "fixture-2",
+      "name": "Brokkoli, gekocht",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 25,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 0.04,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 2.7,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 2.0,
+          "status": "estimated"
+        },
+        "protein": {
+          "value": 3.1,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.03,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0021",
+      "version": "fixture-2",
+      "name": "Weißkohl, roh",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 24,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": null,
+          "status": "not_collected"
+        },
+        "carbohydrate": {
+          "value": 4.2,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 3.9,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 1.4,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.03,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0022",
+      "version": "fixture-2",
+      "name": "Crème fraîche, 30 % Fett",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 292,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 30.0,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 19.0,
+          "status": "measured"
+        },
+        "carbohydrate": {
+          "value": 3.0,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 3.0,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 2.4,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.08,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0023",
+      "version": "fixture-2",
+      "name": "Früchtemüsli, ohne Zuckerzusatz",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 342,
+          "status": "calculated"
+        },
+        "fat": {
+          "value": 6.0,
+          "status": "calculated"
+        },
+        "saturated_fat": {
+          "value": 1.0,
+          "status": "calculated"
+        },
+        "carbohydrate": {
+          "value": 62.0,
+          "status": "calculated"
+        },
+        "sugars": {
+          "value": 18.0,
+          "status": "calculated"
+        },
+        "protein": {
+          "value": 10.0,
+          "status": "calculated"
+        },
+        "salt": {
+          "value": 0.05,
+          "status": "calculated"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0024",
+      "version": "fixture-2",
+      "name": "Apfelkuchen, Rührteig",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 275,
+          "status": "calculated"
+        },
+        "fat": {
+          "value": 11.0,
+          "status": "calculated"
+        },
+        "saturated_fat": {
+          "value": 6.0,
+          "status": "calculated"
+        },
+        "carbohydrate": {
+          "value": 40.0,
+          "status": "calculated"
+        },
+        "sugars": {
+          "value": 22.0,
+          "status": "calculated"
+        },
+        "protein": {
+          "value": 4.0,
+          "status": "calculated"
+        },
+        "salt": {
+          "value": 0.3,
+          "status": "calculated"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0025",
+      "version": "fixture-2",
+      "name": "Kartoffelsalat mit Mayonnaise",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 163,
+          "status": "calculated"
+        },
+        "fat": {
+          "value": 12.0,
+          "status": "calculated"
+        },
+        "saturated_fat": {
+          "value": 1.5,
+          "status": "estimated"
+        },
+        "carbohydrate": {
+          "value": 12.0,
+          "status": "calculated"
+        },
+        "sugars": {
+          "value": 2.0,
+          "status": "estimated"
+        },
+        "protein": {
+          "value": 1.8,
+          "status": "calculated"
+        },
+        "salt": {
+          "value": 1.0,
+          "status": "estimated"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0026",
+      "version": "fixture-2",
+      "name": "Käsespätzle mit Röstzwiebeln (Schwäbische Art, hausgemacht nach traditionellem Rezept)",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 244,
+          "status": "calculated"
+        },
+        "fat": {
+          "value": 12.0,
+          "status": "calculated"
+        },
+        "saturated_fat": {
+          "value": 6.5,
+          "status": "calculated"
+        },
+        "carbohydrate": {
+          "value": 24.0,
+          "status": "calculated"
+        },
+        "sugars": {
+          "value": 1.2,
+          "status": "calculated"
+        },
+        "protein": {
+          "value": 10.0,
+          "status": "calculated"
+        },
+        "salt": {
+          "value": 1.2,
+          "status": "calculated"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0027",
+      "version": "fixture-2",
+      "name": "Vollmilch, 3,5 % Fett",
+      "locale": "de",
+      "base": "100ml",
+      "density_g_per_ml": 1.03,
+      "nutrients": {
+        "energy": {
+          "value": 64,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 3.5,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": 2.2,
+          "status": "calculated"
+        },
+        "carbohydrate": {
+          "value": 4.8,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 4.8,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 3.3,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.1,
+          "status": "measured"
+        }
+      },
+      "kind": "food",
+      "portions": [
+        {
+          "id": "glass",
+          "names": {
+            "de": "1 Glas"
+          },
+          "amount": 200,
+          "default": true
+        }
+      ]
+    },
+    {
+      "external_id": "FIX0028",
+      "version": "fixture-2",
+      "name": "Orangensaft, Direktsaft",
+      "locale": "de",
+      "base": "100ml",
+      "density_g_per_ml": 1.04,
+      "nutrients": {
+        "energy": {
+          "value": 41,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": null,
+          "status": "trace"
+        },
+        "carbohydrate": {
+          "value": 9.0,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 8.5,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 0.7,
+          "status": "measured"
+        },
+        "salt": {
+          "value": null,
+          "status": "trace"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0029",
+      "version": "fixture-2",
+      "name": "Cola, koffeinhaltig",
+      "locale": "de",
+      "base": "100ml",
+      "density_g_per_ml": 1.04,
+      "nutrients": {
+        "energy": {
+          "value": 42,
+          "status": "measured"
+        },
+        "fat": {
+          "value": null,
+          "status": "trace"
+        },
+        "saturated_fat": {
+          "value": null,
+          "status": "trace"
+        },
+        "carbohydrate": {
+          "value": 10.6,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 10.6,
+          "status": "measured"
+        },
+        "protein": {
+          "value": null,
+          "status": "trace"
+        },
+        "salt": {
+          "value": 0.01,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0030",
+      "version": "fixture-2",
+      "name": "Kräutertee, zubereitet",
+      "locale": "de",
+      "base": "100ml",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 1,
+          "status": "estimated"
+        },
+        "fat": {
+          "value": null,
+          "status": "trace"
+        },
+        "saturated_fat": {
+          "value": null,
+          "status": "not_collected"
+        },
+        "carbohydrate": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": null,
+          "status": "missing"
+        },
+        "protein": {
+          "value": null,
+          "status": "trace"
+        },
+        "salt": {
+          "value": null,
+          "status": "not_collected"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0031",
+      "version": "fixture-2",
+      "name": "Gemüsebrühe, zubereitet",
+      "locale": "de",
+      "base": "100ml",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 6,
+          "status": "measured"
+        },
+        "fat": {
+          "value": 0.2,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": null,
+          "status": "not_collected"
+        },
+        "carbohydrate": {
+          "value": 0.8,
+          "status": "measured"
+        },
+        "sugars": {
+          "value": 0.4,
+          "status": "measured"
+        },
+        "protein": {
+          "value": 0.3,
+          "status": "measured"
+        },
+        "salt": {
+          "value": 0.9,
+          "status": "measured"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIX0032",
+      "version": "fixture-2",
+      "name": "Wildkräuter, gemischt, roh",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": null,
+          "status": "missing"
+        },
+        "fat": {
+          "value": 0.6,
+          "status": "measured"
+        },
+        "saturated_fat": {
+          "value": null,
+          "status": "not_collected"
+        },
+        "carbohydrate": {
+          "value": null,
+          "status": "missing"
+        },
+        "sugars": {
+          "value": null,
+          "status": "missing"
+        },
+        "protein": {
+          "value": 2.8,
+          "status": "measured"
+        },
+        "salt": {
+          "value": null,
+          "status": "not_collected"
+        }
+      },
+      "kind": "food"
+    },
+    {
+      "external_id": "FIXR0001",
+      "version": "fixture-2",
+      "kind": "recipe",
+      "name": "Linsensuppe (Beispielrezept)",
+      "locale": "de",
+      "base": "100g",
+      "density_g_per_ml": null,
+      "nutrients": {
+        "energy": {
+          "value": 76,
+          "status": "calculated"
+        },
+        "fat": {
+          "value": 2.1,
+          "status": "calculated"
+        },
+        "saturated_fat": {
+          "value": 0.3,
+          "status": "calculated"
+        },
+        "carbohydrate": {
+          "value": 9.8,
+          "status": "calculated"
+        },
+        "sugars": {
+          "value": 1.1,
+          "status": "partial",
+          "coverage": 0.92
+        },
+        "protein": {
+          "value": 4.6,
+          "status": "calculated"
+        },
+        "salt": {
+          "value": 0.6,
+          "status": "calculated"
+        }
+      },
+      "portions": [
+        {
+          "id": "serving",
+          "names": {
+            "de": "1 Portion"
+          },
+          "amount": 350,
+          "default": true
+        }
+      ]
+    }
+  ]
+}

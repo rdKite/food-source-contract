@@ -1,0 +1,18 @@
+# Changelog
+
+## 1.0 — 2026-09-28
+
+First version in its own repository (Merlin D-32). Replaces Merlin's
+`docs/food-source-contract.md`, draft 0.1.
+
+- **Nutrient registry as data**: the 138 components of BLS 4.0 with EuroFIR codes, units,
+  groups, German and English names and formulas. The seven 0.1 keys keep their names;
+  their EuroFIR codes are corrected (`ENERC` → `ENERCC`, `PROT` → `PROT625`).
+- **Status `partial`** for lower bounds (a recipe with an ingredient gap), with an
+  optional `coverage`. Optional `origin` and `reference` per value.
+- Foods: optional `names` per locale, `kind` (`food` / `recipe`), `portions` with at most
+  one default (the standard portion).
+- Batch lookup `GET /foods?ids=…` (feature `batch`).
+- `/capabilities`: `citation`, `licence`, `identity` (`stable` / `per_version`), `features`.
+- Response header `Food-Source-Contract`; versioning and deprecation rules.
+- OpenAPI 3.1 spec; the fixture (`fixture-2`) validated against it.
