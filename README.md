@@ -20,8 +20,8 @@ copy.
 
 - **Merlin** and **Lori** require this package (`rdkite/food-source-contract`) and read
   the registry and fixture from it.
-- **The BLS service** (`food-service`, Merlin D-33) implements the contract and must pass
-  the conformance suite.
+- **`food-source-service`** (Merlin D-33, D-42) implements the contract — BLS is its first
+  import — and must pass the conformance suite.
 
 A change here is a change for all three. Additions are a minor version (1.x); anything
 else is a major version (see "Versioning" in `CONTRACT.md`). Record every change in
