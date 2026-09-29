@@ -61,7 +61,10 @@ Http::fake(['food.test/*' => function (Request $request) use ($mock) {
 Over HTTP: `php -S 127.0.0.1:8200 mock/router.php` (with
 `FOOD_SOURCE_MOCK_MODE=unavailable` or `rate_limited` to simulate failures).
 
-## Data and attribution
+## Licence, data and attribution
+
+The code and the contract are **MIT** ([`LICENSE`](LICENSE)); the repository is public so
+any country's food service can implement the contract (Merlin D-9, D-36).
 
 The registry's component codes, names, units, groups and formulas come from the component
 table of the **Bundeslebensmittelschlüssel 4.0**, published under **CC BY 4.0**:

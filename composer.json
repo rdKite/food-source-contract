@@ -2,7 +2,7 @@
     "name": "rdkite/food-source-contract",
     "description": "The food-source contract of the Merlin/Lori ecosystem: spec, nutrient registry, fixture and (from 3.B) the conformance suite.",
     "type": "library",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": "^8.4",
         "ext-json": "*",
