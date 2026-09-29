@@ -1,4 +1,4 @@
-# Food-source contract 1.0
+# Food-source contract 1.1
 
 What an application of the ecosystem (Merlin, Lori) expects from **any food source**: a
 country's official food composition database behind a service, a recipe platform, or a
@@ -27,7 +27,11 @@ and the spec disagree, fix one of them — they must say the same.
 
 HTTP, JSON, UTF-8, `GET` only. One base URL per source. Consumers send
 `Accept: application/json` and the requested locale as `?locale=` (e.g. `de`). Every
-response carries the header `Food-Source-Contract: 1.0`.
+response carries the header `Food-Source-Contract` with the version it speaks (`1.1`).
+
+**Authentication** *(1.1)*: a service may require a key per consuming application, sent
+as `Authorization: Bearer <key>`. Without a valid key it answers `401` with the error
+code `unauthorized`. How keys are issued is up to the service.
 
 ## Versioning
 
@@ -47,7 +51,7 @@ What the source is and what it delivers.
 
 ```json
 {
-  "contract_version": "1.0",
+  "contract_version": "1.1",
   "source": {
     "name": "Bundeslebensmittelschlüssel",
     "version": "4.0",
@@ -187,6 +191,7 @@ Error responses carry a JSON body:
 | HTTP | `code` | When |
 |---|---|---|
 | 400 | `bad_request` | Invalid parameters (e.g. more than 100 ids) |
+| 401 | `unauthorized` | The service requires a key and none or an invalid one was sent *(1.1)* |
 | 404 | `not_found` | Unknown `external_id` |
 | 429 | `rate_limited` | Too many requests; `Retry-After` header in seconds |
 | 503 | `unavailable` | The source cannot answer right now |
@@ -207,7 +212,8 @@ each service documents its own mapping.
 
 | BLS "Datenherkunft" / value | `status` |
 |---|---|
-| Analyse, Literatur, Nährstoffdatenbank, Labelangabe | `measured` |
+| Analyse, Literatur, Nährstoffdatenbank | `measured` |
+| Labelangabe (a manufacturer's declaration) | `unspecified` *(corrected in 1.1)* |
 | Rezeptberechnung, Formelberechnung, Musterberechnung, Aggregation, Reskalierung, Logische Null | `calculated` |
 | Übernommener Wert, Logische Annahme | `estimated` |
 | Spuren (`TR`), or a value `<LOD`, `<LOQ`, `<LOD or <LOQ` | `trace` |

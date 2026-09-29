@@ -14,6 +14,8 @@ final readonly class StreamTransport implements Transport
     public function __construct(
         private string $baseUrl,
         private float $timeoutSeconds = 10.0,
+        /** Sent as `Authorization: Bearer` when the service requires a key (1.1). */
+        private ?string $key = null,
     ) {}
 
     public function get(string $path, array $query = []): Response
@@ -22,7 +24,7 @@ final readonly class StreamTransport implements Transport
 
         $context = stream_context_create(['http' => [
             'method' => 'GET',
-            'header' => "Accept: application/json\r\n",
+            'header' => "Accept: application/json\r\n".($this->key === null ? '' : "Authorization: Bearer {$this->key}\r\n"),
             'timeout' => $this->timeoutSeconds,
             'ignore_errors' => true,
         ]]);

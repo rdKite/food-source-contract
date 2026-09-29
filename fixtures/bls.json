@@ -1,6 +1,6 @@
 {
   "_comment": "Fixture of the food-source contract 1.0 (CONTRACT.md). ILLUSTRATIVE VALUES — not taken from the Bundeslebensmittelschlüssel or any other database. Energy is derived from the macronutrients (Atwater 9/4/4), so the records are internally consistent. Consumers use it through their fixture driver in development and tests.",
-  "contract_version": "1.0",
+  "contract_version": "1.1",
   "source": {
     "name": "BLS (Fixture)",
     "version": "fixture-2",

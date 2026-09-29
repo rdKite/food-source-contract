@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Food-source contract
-  version: '1.0'
+  version: '1.1'
   description: |
     What the applications of the ecosystem (Merlin, Lori) expect from any food source.
     The prose in CONTRACT.md and this file must say the same. Nutrient keys come from
@@ -92,7 +92,18 @@ paths:
         '429': { $ref: '#/components/responses/RateLimited' }
         '503': { $ref: '#/components/responses/Error' }
 
+# 1.1: a service may require a key; one without it simply ignores the header.
+security:
+  - {}
+  - bearer: []
+
 components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      description: One key per consuming application, if the service requires it.
+
   headers:
     ContractVersion:
       description: The contract version the response conforms to.
@@ -269,5 +280,5 @@ components:
           type: object
           required: [code, message]
           properties:
-            code: { type: string, enum: [bad_request, not_found, rate_limited, unavailable] }
+            code: { type: string, enum: [bad_request, not_found, rate_limited, unavailable, unauthorized] }
             message: { type: string }

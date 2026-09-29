@@ -6,7 +6,7 @@ declare(strict_types=1);
 /*
  * Checks a food source against the contract.
  *
- *   vendor/bin/food-source-conformance https://food.example --query=Hafer
+ *   vendor/bin/food-source-conformance https://food.example --query=Hafer [--key=…]
  *
  * Exit code 0 when every requirement passes (skipped ones included), 1 otherwise.
  */
@@ -25,20 +25,23 @@ foreach ([__DIR__.'/../vendor/autoload.php', __DIR__.'/../../../autoload.php'] a
 
 $url = null;
 $query = null;
+$key = getenv('FOOD_SOURCE_KEY') ?: null;
 foreach (array_slice($argv, 1) as $arg) {
     if (str_starts_with($arg, '--query=')) {
         $query = substr($arg, 8);
+    } elseif (str_starts_with($arg, '--key=')) {
+        $key = substr($arg, 6);
     } elseif (! str_starts_with($arg, '--')) {
         $url = $arg;
     }
 }
 
 if ($url === null || $query === null || mb_strlen($query) < 2) {
-    fwrite(STDERR, "Usage: food-source-conformance <base-url> --query=<text that finds foods>\n");
+    fwrite(STDERR, "Usage: food-source-conformance <base-url> --query=<text that finds foods> [--key=<api key>]\n");
     exit(2);
 }
 
-$results = (new Suite(new StreamTransport($url), $query))->run();
+$results = (new Suite(new StreamTransport($url, key: $key), $query))->run();
 
 echo 'Food-source contract '.Contract::VERSION." — {$url}\n\n";
 foreach ($results as $result) {

@@ -3,6 +3,18 @@
 Contract versions (what services and consumers must agree on) and tooling changes (this
 package's code) are listed separately; tooling never changes the contract.
 
+## 1.1 — 2026-09-29
+
+Additive (a 1.0 consumer keeps working):
+
+- **Authentication**: a service may require `Authorization: Bearer <key>` per consuming
+  application (Merlin D-41); without a valid key it answers `401` with the new error code
+  `unauthorized`.
+- Informative BLS mapping: "Labelangabe" (a manufacturer's declaration) is `unspecified`,
+  not `measured`.
+
+Tooling: the conformance CLI takes `--key` (or `FOOD_SOURCE_KEY`).
+
 ## Tooling 1.0.1 — 2026-09-29
 
 - Allows `symfony/yaml` 8 next to 7 (Merlin is on 8).
