@@ -3,6 +3,10 @@
 Contract versions (what services and consumers must agree on) and tooling changes (this
 package's code) are listed separately; tooling never changes the contract.
 
+## Tooling 1.0.1 — 2026-09-29
+
+- Allows `symfony/yaml` 8 next to 7 (Merlin is on 8).
+
 ## Tooling — 2026-09-29
 
 - **Conformance suite**: 15 numbered requirements (capabilities, search, food, errors,
