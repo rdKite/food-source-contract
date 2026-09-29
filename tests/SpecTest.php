@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FoodSourceContract\Tests;
 
 use FoodSourceContract\Contract;
+use FoodSourceContract\SchemaValidator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 

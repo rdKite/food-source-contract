@@ -1,0 +1,58 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/*
+ * Checks a food source against the contract.
+ *
+ *   vendor/bin/food-source-conformance https://food.example --query=Hafer
+ *
+ * Exit code 0 when every requirement passes (skipped ones included), 1 otherwise.
+ */
+
+use FoodSourceContract\Conformance\Outcome;
+use FoodSourceContract\Conformance\Suite;
+use FoodSourceContract\Contract;
+use FoodSourceContract\Http\StreamTransport;
+
+foreach ([__DIR__.'/../vendor/autoload.php', __DIR__.'/../../../autoload.php'] as $autoload) {
+    if (is_file($autoload)) {
+        require $autoload;
+        break;
+    }
+}
+
+$url = null;
+$query = null;
+foreach (array_slice($argv, 1) as $arg) {
+    if (str_starts_with($arg, '--query=')) {
+        $query = substr($arg, 8);
+    } elseif (! str_starts_with($arg, '--')) {
+        $url = $arg;
+    }
+}
+
+if ($url === null || $query === null || mb_strlen($query) < 2) {
+    fwrite(STDERR, "Usage: food-source-conformance <base-url> --query=<text that finds foods>\n");
+    exit(2);
+}
+
+$results = (new Suite(new StreamTransport($url), $query))->run();
+
+echo 'Food-source contract '.Contract::VERSION." — {$url}\n\n";
+foreach ($results as $result) {
+    $mark = match ($result->outcome) {
+        Outcome::Passed => 'PASS',
+        Outcome::Failed => 'FAIL',
+        Outcome::Skipped => 'SKIP',
+    };
+    printf("%s  %-8s %s\n", $mark, $result->id, $result->requirement);
+    if ($result->detail !== '') {
+        printf("               %s\n", $result->detail);
+    }
+}
+
+$failed = count(array_filter($results, fn ($r) => ! $r->passed()));
+printf("\n%d requirements, %d failed\n", count($results), $failed);
+exit($failed === 0 ? 0 : 1);

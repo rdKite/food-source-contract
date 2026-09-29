@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace FoodSourceContract\Tests;
+namespace FoodSourceContract;
 
-use FoodSourceContract\Contract;
 use Opis\JsonSchema\Errors\ErrorFormatter;
 use Opis\JsonSchema\Validator;
 use Symfony\Component\Yaml\Yaml;
 
 /**
  * Validates data against a schema of spec/openapi.yaml (OpenAPI 3.1 schemas
- * are JSON Schema 2020-12). The conformance suite (3.B) builds on this.
+ * are JSON Schema 2020-12). Used by the conformance suite and the tests.
  */
 final class SchemaValidator
 {

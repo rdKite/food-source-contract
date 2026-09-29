@@ -6,6 +6,7 @@ namespace FoodSourceContract\Tests;
 
 use FoodSourceContract\Contract;
 use FoodSourceContract\NutrientRegistry;
+use FoodSourceContract\SchemaValidator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

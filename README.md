@@ -13,7 +13,8 @@ copy.
 | The canonical nutrients (138, from BLS 4.0) | [`registry/nutrients.json`](registry/nutrients.json) |
 | An illustrative fixture a consumer's fixture driver serves | [`fixtures/bls.json`](fixtures/bls.json) |
 | PHP access to the registry and paths | [`src/`](src) |
-| Conformance suite and reference mock | *coming in Merlin Phase 3.B* |
+| Conformance suite (15 numbered requirements) | [`src/Conformance`](src/Conformance), CLI `bin/food-source-conformance` |
+| Reference mock serving the fixture, with failure modes | [`src/Mock/FixtureSource.php`](src/Mock/FixtureSource.php), server `mock/router.php` |
 
 ## Consumers and implementers
 
@@ -25,6 +26,40 @@ copy.
 A change here is a change for all three. Additions are a minor version (1.x); anything
 else is a major version (see "Versioning" in `CONTRACT.md`). Record every change in
 [`CHANGELOG.md`](CHANGELOG.md) and tell both application plans.
+
+## Checking a service
+
+```bash
+vendor/bin/food-source-conformance https://food.example --query=Hafer
+```
+
+`--query` is a text that finds foods in that source (the suite discovers everything else).
+Every requirement has an id (`CAP-1` … `BATCH-2`); exit code 0 only if none fails. A
+service must pass before it may be configured as a data source.
+
+## Using the mock in a consumer's tests
+
+`FixtureSource` is a function from request to response, so it plugs into any HTTP fake —
+consumers test against the contract instead of hand-written payloads. In Laravel:
+
+```php
+use FoodSourceContract\Mock\FixtureSource;
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Http;
+
+$mock = new FixtureSource;                       // or MODE_UNAVAILABLE, MODE_RATE_LIMITED
+
+Http::fake(['food.test/*' => function (Request $request) use ($mock) {
+    $url = parse_url($request->url());
+    parse_str($url['query'] ?? '', $query);
+    $response = $mock->handle($url['path'], $query);
+
+    return Http::response($response->body, $response->status, $response->headers);
+}]);
+```
+
+Over HTTP: `php -S 127.0.0.1:8200 mock/router.php` (with
+`FOOD_SOURCE_MOCK_MODE=unavailable` or `rate_limited` to simulate failures).
 
 ## Data and attribution
 
@@ -40,7 +75,7 @@ The fixture's food values are **illustrative**, not BLS data.
 
 ```bash
 composer install
-./vendor/bin/phpunit                                  # registry, spec, fixture
+./vendor/bin/phpunit                                  # registry, spec, fixture, suite
 ./vendor/bin/pint --test
-./vendor/bin/phpstan analyse --level 8 src tests
+./vendor/bin/phpstan analyse --level 8 src tests bin mock
 ```
