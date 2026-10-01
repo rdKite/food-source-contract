@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Food-source contract
-  version: '1.1'
+  version: '1.2'
   description: |
     What the applications of the ecosystem (Merlin, Lori) expect from any food source.
     The prose in CONTRACT.md and this file must say the same. Nutrient keys come from
@@ -166,6 +166,12 @@ components:
             citation: { type: string }
             licence: { type: string }
             identity: { type: string, enum: [stable, per_version] }
+            revision:
+              type: string
+              minLength: 1
+              description: >-
+                1.2: the service's own curation state on top of `version` (densities,
+                portions, mapping fixes). Consumers store foods per (version, revision).
         nutrients:
           type: array
           uniqueItems: true
@@ -203,6 +209,10 @@ components:
       properties:
         external_id: { type: string, minLength: 1 }
         version: { type: string, minLength: 1 }
+        revision:
+          type: string
+          minLength: 1
+          description: 1.2 — equals `source.revision` in /capabilities; absent when that is absent.
         kind: { $ref: '#/components/schemas/Kind' }
         name: { type: string, minLength: 1 }
         locale: { $ref: '#/components/schemas/Locale' }

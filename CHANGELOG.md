@@ -3,6 +3,18 @@
 Contract versions (what services and consumers must agree on) and tooling changes (this
 package's code) are listed separately; tooling never changes the contract.
 
+## 1.2 — 2026-09-30
+
+Additive (a 1.0 or 1.1 consumer keeps working):
+
+- **`revision`**: an optional `source.revision` in `/capabilities`, repeated on every
+  record — the service's own curation state (densities, household measures, mapping
+  fixes) on top of the source's `version` (Merlin D-47). Consumers store foods per
+  `(version, revision)`, so a curated value reaches them the way a new data version does.
+- Conformance: FOOD-1 and BATCH-1 check that records carry the declared revision (and
+  none when none is declared). The reference mock serves a fixture's `source.revision`
+  on every record.
+
 ## 1.1 — 2026-09-29
 
 Additive (a 1.0 consumer keeps working):

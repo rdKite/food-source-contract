@@ -184,7 +184,7 @@ final class Suite
                 if ($food['external_id'] !== $id) {
                     $errors[] = "{$id}: answers for {$food['external_id']}";
                 }
-                foreach ($this->versionErrors($food['version']) as $error) {
+                foreach ([...$this->versionErrors($food['version']), ...$this->revisionErrors($food)] as $error) {
                     $errors[] = "{$id}: {$error}";
                 }
                 foreach (array_keys((array) $food['nutrients']) as $key) {
@@ -248,6 +248,11 @@ final class Suite
 
         if ($errors === [] && is_array($data)) {
             $found = array_map(fn ($food) => $food['external_id'], (array) $data['foods']);
+            foreach ((array) $data['foods'] as $food) {
+                foreach ($this->revisionErrors((array) $food) as $error) {
+                    $errors[] = "{$food['external_id']}: {$error}";
+                }
+            }
             if (array_diff($known, $found) !== []) {
                 $errors[] = 'known ids missing from foods: '.implode(', ', array_diff($known, $found));
             }
@@ -301,6 +306,20 @@ final class Suite
         $declared = $this->capabilities['source']['version'] ?? null;
 
         return $version === $declared ? [] : ['data version '.json_encode($version).' differs from /capabilities '.json_encode($declared)];
+    }
+
+    /**
+     * 1.2: a record carries the curation revision of /capabilities, and none without one.
+     *
+     * @param  array<mixed>  $food
+     * @return list<string>
+     */
+    private function revisionErrors(array $food): array
+    {
+        $declared = $this->capabilities['source']['revision'] ?? null;
+        $revision = $food['revision'] ?? null;
+
+        return $revision === $declared ? [] : ['revision '.json_encode($revision).' differs from /capabilities '.json_encode($declared)];
     }
 
     /** @return list<string> */

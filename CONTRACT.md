@@ -1,4 +1,4 @@
-# Food-source contract 1.1
+# Food-source contract 1.2
 
 What an application of the ecosystem (Merlin, Lori) expects from **any food source**: a
 country's official food composition database behind a service, a recipe platform, or a
@@ -27,7 +27,7 @@ and the spec disagree, fix one of them — they must say the same.
 
 HTTP, JSON, UTF-8, `GET` only. One base URL per source. Consumers send
 `Accept: application/json` and the requested locale as `?locale=` (e.g. `de`). Every
-response carries the header `Food-Source-Contract` with the version it speaks (`1.1`).
+response carries the header `Food-Source-Contract` with the version it speaks (`1.2`).
 
 **Authentication** *(1.1)*: a service may require a key per consuming application, sent
 as `Authorization: Bearer <key>`. Without a valid key it answers `401` with the error
@@ -51,7 +51,7 @@ What the source is and what it delivers.
 
 ```json
 {
-  "contract_version": "1.1",
+  "contract_version": "1.2",
   "source": {
     "name": "Bundeslebensmittelschlüssel",
     "version": "4.0",
@@ -59,7 +59,8 @@ What the source is and what it delivers.
     "locales": ["de", "en"],
     "citation": "Max Rubner-Institut (2025): Bundeslebensmittelschlüssel (BLS), Version 4.0 — Deutsche Nährstoffdatenbank. Karlsruhe. DOI: 10.25826/Data20251217-134202-0",
     "licence": "CC BY 4.0",
-    "identity": "stable"
+    "identity": "stable",
+    "revision": "3"
   },
   "nutrients": ["energy", "fat", "protein", "…"],
   "features": ["batch", "portions"]
@@ -73,6 +74,12 @@ What the source is and what it delivers.
   `stable` (an id always means the same food; retired ids are never reissued),
   `per_version` (ids are only valid within one data version). Consumers move logged
   entries to a new data version automatically **only** for `stable`.
+- `source.revision` *(1.2, optional)* — the service's **own curation state** on top of
+  `version`: values the service adds or corrects itself (densities, household measures,
+  a fixed mapping), while the source's data version stays the same. Opaque; a new
+  revision is a new string. Every record carries the same `revision`. Consumers store
+  foods per `(version, revision)` and treat a new revision like a new data version.
+  Absent: the service curates nothing of its own.
 - `nutrients` — the registry keys this source ever reports. A key **not** listed is
   `not_collected` for every food of this source.
 - `features` — optional parts of this contract the service implements (see below).
@@ -101,6 +108,7 @@ One food with all its values.
 {
   "external_id": "C133000",
   "version": "4.0",
+  "revision": "3",
   "kind": "food",
   "name": "Hafer Flocken",
   "locale": "de",
@@ -119,6 +127,7 @@ One food with all its values.
 }
 ```
 
+- `revision` *(1.2)* — the `source.revision` of `/capabilities`; absent when that is.
 - `kind` — `food` (a single food) or `recipe` (a dish computed from ingredients, e.g. a
   recipe platform's revision). Optional; absent means `food`.
 - `names` — optional; every locale the source has. `name` + `locale` stay mandatory.

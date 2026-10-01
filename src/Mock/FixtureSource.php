@@ -168,6 +168,13 @@ final class FixtureSource
             $food['locale'] = $locale;
         }
 
+        // 1.2: every record carries the source's curation revision, if it has one.
+        /** @var array{revision?: string} $source */
+        $source = $this->fixture['source'];
+        if (isset($source['revision'])) {
+            $food['revision'] = $source['revision'];
+        }
+
         return $food;
     }
 

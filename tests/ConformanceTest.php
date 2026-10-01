@@ -8,6 +8,7 @@ use Closure;
 use FoodSourceContract\Conformance\Outcome;
 use FoodSourceContract\Conformance\Result;
 use FoodSourceContract\Conformance\Suite;
+use FoodSourceContract\Contract;
 use FoodSourceContract\Http\CallableTransport;
 use FoodSourceContract\Http\Response;
 use FoodSourceContract\Mock\FixtureSource;
@@ -116,6 +117,44 @@ final class ConformanceTest extends TestCase
         }));
 
         $this->assertSame(['FOOD-1'], $this->failed($results));
+    }
+
+    public function test_a_source_with_a_revision_passes_when_every_record_carries_it(): void
+    {
+        $results = $this->check(new FixtureSource(fixturePath: $this->fixtureWithRevision('3'))->handle(...));
+
+        $this->assertSame([], $this->failed($results));
+    }
+
+    public function test_a_record_without_the_declared_revision_fails_food_1_and_batch_1(): void
+    {
+        $mock = new FixtureSource(fixturePath: $this->fixtureWithRevision('3'));
+        $results = $this->check(function (string $path, array $query) use ($mock) {
+            $r = $mock->handle($path, $query);
+            if ($path === '/capabilities' || $path === '/foods/search' || $r->status !== 200) {
+                return $r;
+            }
+            $data = (array) $r->json();
+            if ($path === '/foods') {
+                $data['foods'] = array_map(fn ($food) => [...(array) $food, 'revision' => '2'], (array) $data['foods']);
+            } else {
+                unset($data['revision']);
+            }
+
+            return $this->with($r, $data);
+        });
+
+        $this->assertSame(['BATCH-1', 'FOOD-1'], $this->failed($results));
+    }
+
+    private function fixtureWithRevision(string $revision): string
+    {
+        $fixture = json_decode((string) file_get_contents(Contract::fixturePath()), true, flags: JSON_THROW_ON_ERROR);
+        $fixture['source']['revision'] = $revision;
+        $path = (string) tempnam(sys_get_temp_dir(), 'fixture');
+        file_put_contents($path, (string) json_encode($fixture));
+
+        return $path;
     }
 
     public function test_a_server_error_for_an_unknown_id_fails_food_3(): void
