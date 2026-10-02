@@ -9,7 +9,7 @@ namespace FoodSourceContract;
  */
 final class Contract
 {
-    public const string VERSION = '1.2';
+    public const string VERSION = '1.3';
 
     /** Every value status (CONTRACT.md "Status"). */
     public const array STATUSES = [

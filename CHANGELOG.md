@@ -3,6 +3,16 @@
 Contract versions (what services and consumers must agree on) and tooling changes (this
 package's code) are listed separately; tooling never changes the contract.
 
+## 1.3 — 2026-10-02
+
+Additive (a 1.0 – 1.2 consumer keeps working):
+
+- **`recipe`**: an optional object on records of kind `recipe` (Lori L-43, I2) — `url`,
+  `author`, `revision` (the recipe's own, immutable), `published_at`, `yield_portions`,
+  `portion_weight_g`, `weight_source` (`measured` / `raw_sum`), `citations`. Consumers
+  store recipe foods per `recipe.revision`. Checked by the schema; no new numbered
+  conformance requirement.
+
 ## 1.2 — 2026-09-30
 
 Additive (a 1.0 or 1.1 consumer keeps working):

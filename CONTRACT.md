@@ -1,4 +1,4 @@
-# Food-source contract 1.2
+# Food-source contract 1.3
 
 What an application of the ecosystem (Merlin, Lori) expects from **any food source**: a
 country's official food composition database behind a service, a recipe platform, or a
@@ -27,7 +27,7 @@ and the spec disagree, fix one of them — they must say the same.
 
 HTTP, JSON, UTF-8, `GET` only. One base URL per source. Consumers send
 `Accept: application/json` and the requested locale as `?locale=` (e.g. `de`). Every
-response carries the header `Food-Source-Contract` with the version it speaks (`1.2`).
+response carries the header `Food-Source-Contract` with the version it speaks (`1.3`).
 
 **Authentication** *(1.1)*: a service may require a key per consuming application, sent
 as `Authorization: Bearer <key>`. Without a valid key it answers `401` with the error
@@ -51,7 +51,7 @@ What the source is and what it delivers.
 
 ```json
 {
-  "contract_version": "1.2",
+  "contract_version": "1.3",
   "source": {
     "name": "Bundeslebensmittelschlüssel",
     "version": "4.0",
@@ -139,6 +139,30 @@ One food with all its values.
 - `portions` — optional (feature `portions`): named amounts. `amount` is in the unit of
   the food's `base` (g for `100g`, ml for `100ml`). At most one may carry
   `"default": true`: the standard portion (a recipe's serving, a slice of bread).
+- `recipe` *(1.3, optional, only with `kind: recipe`)* — what a recipe platform knows about
+  the dish (Lori L-43):
+
+  ```json
+  "recipe": {
+    "revision": 3,
+    "url": "https://lori.example/recipes/0190…/linsen-dal",
+    "author": "@mira",
+    "published_at": "2026-10-02T09:15:00+02:00",
+    "yield_portions": 4,
+    "portion_weight_g": 350,
+    "weight_source": "measured",
+    "citations": ["Max Rubner-Institut (2025): Bundeslebensmittelschlüssel (BLS), Version 4.0 …"]
+  }
+  ```
+
+  `revision` is the recipe's **own** immutable revision — not the source's `version`, which
+  stays one value for the whole source. **Consumers store recipe foods per
+  `recipe.revision`:** a new revision is a new food; entries logged against an earlier one
+  keep it. To learn whether a recipe changed, a consumer fetches it by id and compares
+  `recipe.revision`. `weight_source` says whether the per-100-g values rest on a weighed
+  finished dish (`measured`) or on the sum of the raw ingredients (`raw_sum`, cooking
+  losses of weight not included). `citations` name the data behind the values, as their
+  licences require.
 
 ### `GET /foods?ids={id},{id},…&locale={locale}` *(feature `batch`)*
 
